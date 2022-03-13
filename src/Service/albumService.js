@@ -9,7 +9,7 @@ class albumService {
         this._db = new Pool()
     }
 
-    async  addAlbum({name,year}){
+    async addAlbum({name,year}){
         const id = "album-"+nanoid(16)
         const query = {
             text:"INSERT INTO album VALUES ($1,$2,$3) RETURNING id",
