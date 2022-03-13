@@ -17,7 +17,7 @@ class albumService {
         }
 
         const result=  await this._db.query(query)
-        if (!result.rows[0].id){
+        if (result.rows.length<1){
             throw new InvariantError("Album gagal ditambahkan")
         }
 
