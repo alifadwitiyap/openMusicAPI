@@ -2,6 +2,7 @@ const Hapi = require('@hapi/hapi');
 const AlbumService = require('./Service/AlbumService')
 const SongService = require('./Service/SongService')
 const musicApi = require('./api/MusicAPI')
+const validator = require('./Validator')
 require('dotenv').config()
 
 
@@ -23,6 +24,7 @@ const init = async () => {
     options: {
       albumService: albumService,
       songService: songService,
+      validator:validator
     }
   })
 

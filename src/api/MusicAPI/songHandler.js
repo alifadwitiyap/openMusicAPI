@@ -2,8 +2,9 @@ const catchError = require('../../util/catchError')
 
 class SongHandler  {
 
-    constructor(songService){
+    constructor(songService,validator){
         this._songService = songService
+        this._validator = validator
         this.postSongHandler = this.postSongHandler.bind(this)
         this.getSongs = this.getSongs.bind(this)
         this.getSongById = this.getSongById.bind(this)
@@ -13,6 +14,7 @@ class SongHandler  {
 
     async postSongHandler(request,h){
         try {
+            this._validator(request.payload,'song')
             const songId = await this._songService.addSong(request.payload)
             return h.response({
                 status: 'success',
@@ -25,7 +27,7 @@ class SongHandler  {
 
     async getSongs(request,h){
         try {
-            const songs = await this._songService.getSongs(request.payload)
+            const songs = await this._songService.getSongs()
             return h.response({
                 status: 'success',
                 data: { songs }
@@ -49,6 +51,7 @@ class SongHandler  {
 
     async updateSongById(request,h){
         try {
+            this._validator(request.payload,'song')
             await this._songService.updateSongById(request.params,request.payload)
             return h.response({
                 status: 'success',
