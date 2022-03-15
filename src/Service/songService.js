@@ -6,7 +6,7 @@ const InvariantError = require('../exception/InvariantError');
 require('dotenv').config()
 
 
-class songService {
+class SongService {
     constructor() {
         this._db = new Pool()
     }
@@ -64,7 +64,7 @@ class songService {
 
     }
 
-    async deleteSongByID({id}){
+    async deleteSongByID({ id }) {
         const query = {
             text: 'DELETE FROM song WHERE id=$1 RETURNING id',
             values: [id]
@@ -78,34 +78,4 @@ class songService {
 
 }
 
-
-
-tes = new songService()
-//update song
-// testfunc = async ()=>{
-//     console.log(await tes.updateSongById({id:"song-g4ZStrDgwpBmHbV-"},{
-//         title:'TERUPDATE',
-//         year:2012,
-//         genre:'TERUPDATE',
-//         performer:'TERUPDATE',
-//         duration: 999,
-//         albumId:'TERUPDATE',
-//     }))
-// }
-//add song
-// testfunc = async ()=>{
-//     console.log(await tes.addSong({
-//         title:'BARU DITAMBAH',
-//         year:2012,
-//         genre:'BARU DITAMBAH',
-//         performer:'BARU DITAMBAH',
-//         duration: 999,
-//         albumId:'BARU DITAMBAH',
-//     }))
-// }
-//getsong
-testfunc = async () => {
-    console.log(await tes.deleteSongByID({id:'song-g4ZStrDgwpBmHbV-'}))
-}
-
-testfunc()
+module.exports = SongService
