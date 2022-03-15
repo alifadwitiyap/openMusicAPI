@@ -2,8 +2,9 @@ const catchError = require('../../util/catchError')
 
 class SongHandler  {
 
-    constructor(songService,validator){
+    constructor(songService,optionalService,validator){
         this._songService = songService
+        this._optionalService = optionalService
         this._validator = validator
         this.postSongHandler = this.postSongHandler.bind(this)
         this.getSongs = this.getSongs.bind(this)

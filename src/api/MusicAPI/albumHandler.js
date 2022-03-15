@@ -2,8 +2,9 @@ const catchError = require('../../util/catchError')
 
 class albumHandler {
 
-    constructor(albumService,validator) {
+    constructor(albumService, optionalService, validator) {
         this._albumService = albumService
+        this._optionalService = optionalService
         this._validator = validator
         this.postAlbumHandler = this.postAlbumHandler.bind(this)
         this.getAlbumByIdHandler = this.getAlbumByIdHandler.bind(this)
@@ -13,7 +14,7 @@ class albumHandler {
 
     async postAlbumHandler(request, h) {
         try {
-            this._validator(request.payload,'album')
+            this._validator(request.payload, 'album')
             const albumId = await this._albumService.addAlbum(request.payload)
             return h.response({
                 status: 'success',
@@ -27,10 +28,11 @@ class albumHandler {
 
     async getAlbumByIdHandler(request, h) {
         try {
-            const album = await this._albumService.getAlbumByID(request.params)
+            let album = await this._albumService.getAlbumByID(request.params)
+            album.songs = await this._optionalService.getSongsByAlbumId(album)
             return h.response({
                 status: 'success',
-                data: { album }
+                data: {album}
             }).code(200)
         } catch (error) {
             return catchError(error, h)
@@ -39,7 +41,7 @@ class albumHandler {
 
     async putAlbumByIdHandler(request, h) {
         try {
-            this._validator(request.payload,'album')
+            this._validator(request.payload, 'album')
             await this._albumService.updateAlbumByID(request.params, request.payload)
             return h.response({
                 status: 'success',

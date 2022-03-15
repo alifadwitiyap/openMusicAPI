@@ -4,7 +4,6 @@ const getSongbyIdMapper = require('../util/getSongByIdMapper')
 const getSongsMapper = require('../util/getSongsMapper')
 const NotFoundError = require('../exception/NotFoundError');
 const InvariantError = require('../exception/InvariantError');
-require('dotenv').config()
 
 
 class SongService {
