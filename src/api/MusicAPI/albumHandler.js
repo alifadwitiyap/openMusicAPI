@@ -1,6 +1,6 @@
 const catchError = require('../../util/catchError')
 
-class Handler {
+class albumHandler {
 
     constructor(albumService) {
         this._albumService = albumService
@@ -62,4 +62,4 @@ class Handler {
 
 }
 
-module.exports = Handler
+module.exports = albumHandler

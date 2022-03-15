@@ -1,6 +1,7 @@
 const { Pool } = require('pg')
 const { nanoid } = require('nanoid')
-const songMapper = require('../util/songMapper')
+const getSongbyIdMapper = require('../util/getSongByIdMapper')
+const getSongsMapper = require('../util/getSongsMapper')
 const NotFoundError = require('../exception/NotFoundError');
 const InvariantError = require('../exception/InvariantError');
 require('dotenv').config()
@@ -32,7 +33,7 @@ class SongService {
 
         const result = await this._db.query(query)
 
-        return result.rows.map(songMapper)
+        return result.rows.map(getSongsMapper)
     }
 
     async getSongById({ id }) {
@@ -40,13 +41,12 @@ class SongService {
             text: 'SELECT * FROM song WHERE id = $1',
             values: [id]
         }
-
         const result = await this._db.query(query)
         if (result.rows.length < 1) {
             throw new NotFoundError("Lagu gagal ditambahkan, id tidak ditemukan")
         }
 
-        return result.rows.map(songMapper)
+        return result.rows.map(getSongbyIdMapper)[0]
     }
 
 

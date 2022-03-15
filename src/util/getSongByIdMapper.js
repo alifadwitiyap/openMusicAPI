@@ -1,4 +1,4 @@
-const songMapper = ({
+const getSongByIdMapper = ({
     id,
     title,
     year,
@@ -16,5 +16,5 @@ const songMapper = ({
     albumId:album_id
 })
 
-module.exports =songMapper
+module.exports =getSongByIdMapper
     
