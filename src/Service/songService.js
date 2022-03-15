@@ -25,13 +25,31 @@ class SongService {
         return result.rows[0].id
     }
 
-    async getSongs() {
-        const query = {
-            text: 'SELECT * FROM song',
+    async getSongs({title,performer}) {
+        let query
+        if (title && performer){
+            query = {
+                text: 'SELECT * FROM song WHERE LOWER(title) LIKE $1 AND LOWER(performer) LIKE $2',
+                values:[title+'%', performer+'%']
+            }
+        }else if (title){
+            query = {
+                text: 'SELECT * FROM song WHERE LOWER(title) LIKE $1',
+                values:[title+'%']
+            }
+        }else if (performer){
+            query = {
+                text: 'SELECT * FROM song WHERE LOWER(performer) LIKE $1',
+                values:[performer+'%']
+            }
+        }else{
+            query = {
+                text: 'SELECT * FROM song',
+            }
         }
-
+        
+        
         const result = await this._db.query(query)
-
         return result.rows.map(getSongsMapper)
     }
 
