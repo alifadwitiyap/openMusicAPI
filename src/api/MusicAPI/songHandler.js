@@ -1,8 +1,8 @@
 const catchError = require('../../util/catchError')
 
-class SongHandler  {
+class SongHandler {
 
-    constructor(songService,optionalService,validator){
+    constructor(songService, optionalService, validator) {
         this._songService = songService
         this._optionalService = optionalService
         this._validator = validator
@@ -13,9 +13,9 @@ class SongHandler  {
         this.deleteSongById = this.deleteSongById.bind(this)
     }
 
-    async postSongHandler(request,h){
+    async postSongHandler(request, h) {
         try {
-            this._validator(request.payload,'song')
+            this._validator(request.payload, 'song')
             const songId = await this._songService.addSong(request.payload)
             return h.response({
                 status: 'success',
@@ -26,7 +26,7 @@ class SongHandler  {
         }
     }
 
-    async getSongs(request,h){
+    async getSongs(request, h) {
         try {
             const songs = await this._songService.getSongs(request.query)
             return h.response({
@@ -38,7 +38,7 @@ class SongHandler  {
         }
     }
 
-    async getSongById(request,h){
+    async getSongById(request, h) {
         try {
             const song = await this._songService.getSongById(request.params)
             return h.response({
@@ -50,25 +50,25 @@ class SongHandler  {
         }
     }
 
-    async updateSongById(request,h){
+    async updateSongById(request, h) {
         try {
-            this._validator(request.payload,'song')
-            await this._songService.updateSongById(request.params,request.payload)
+            this._validator(request.payload, 'song')
+            await this._songService.updateSongById(request.params, request.payload)
             return h.response({
                 status: 'success',
-                message : "Lagu berhasil di updated"
+                message: "Lagu berhasil di updated"
             }).code(200)
         } catch (error) {
             return catchError(error, h)
         }
     }
 
-    async deleteSongById(request,h){
+    async deleteSongById(request, h) {
         try {
             await this._songService.deleteSongByID(request.params)
             return h.response({
                 status: 'success',
-                message : "Lagu berhasil di delete"
+                message: "Lagu berhasil di delete"
             }).code(200)
         } catch (error) {
             return catchError(error, h)
