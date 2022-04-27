@@ -1,14 +1,17 @@
-const ClientError = require('../exception/ClientError');
+const responseError = require('../exception/responseError');
 
-module.exports=async (error,h)=>{
-    if (error instanceof ClientError) {
-        return h.response({
+
+module.exports = async (request, h) => {
+    const { response } = request;
+
+    if (response instanceof responseError) {
+        const newResponse = h.response({
             status: 'fail',
-            message: error.message
-        }).code(error.statusCode)
+            message: response.message,
+        });
+        newResponse.code(response.statusCode);
+        return newResponse;
     }
-    return h.response({
-        status: 'error',
-        message: "Maaf, terjadi kegagalan pada server kami"
-    }).code(500)
+
+    return response.continue || response;
 }
