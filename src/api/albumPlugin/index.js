@@ -6,7 +6,7 @@ module.exports = {
     name: 'album plugin',
     version: '1.0.0',
     register: async (server, { service, validator }) => {
-        const albumhandler = new handler(service, validator)
-        server.route(route(albumhandler))
+        const Handler = new handler(service, validator)
+        server.route(route(Handler))
     }
 }

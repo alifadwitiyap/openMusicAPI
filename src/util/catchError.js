@@ -13,5 +13,14 @@ module.exports = async (request, h) => {
         return newResponse;
     }
 
+    if (response.code == 23505) {
+        const newResponse = h.response({
+            status: 'fail',
+            message: response.message,
+        });
+        newResponse.code(400);
+        return newResponse;
+    }
+
     return response.continue || response;
 }

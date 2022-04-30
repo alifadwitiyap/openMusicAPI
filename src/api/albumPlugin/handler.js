@@ -1,7 +1,5 @@
 
-
 module.exports = class albumHandler {
-
     constructor(albumService, validator) {
         this._albumService = albumService
         this._validator = validator
@@ -22,7 +20,7 @@ module.exports = class albumHandler {
     }
 
     async getAlbumByIdHandler(request, h) {
-        let album = await this._albumService.getAlbumByID(request.params)
+        const album = await this._albumService.getAlbumByID(request.params)
         album.songs = await this._albumService.getSongsByAlbumId(album)
         return h.response({
             status: 'success',
@@ -37,7 +35,6 @@ module.exports = class albumHandler {
             status: 'success',
             message: 'Data Berhasil di Update'
         }).code(200)
-
     }
 
     async deleteAlbumByIdHandler(request, h) {
@@ -46,9 +43,5 @@ module.exports = class albumHandler {
             status: 'success',
             message: 'Data Berhasil di Hapus'
         }).code(200)
-
     }
-
-
 }
-

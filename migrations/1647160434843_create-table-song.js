@@ -1,38 +1,33 @@
-/* eslint-disable camelcase */
-
-exports.shorthands = undefined;
+exports.shorthands = {
+    text: {
+        type: 'TEXT',
+        notNull: true
+    },
+    id: {
+        type: 'VARCHAR(50)',
+        primaryKey: true
+    },
+    number: {
+        type: 'SMALLINT',
+    }
+};
 
 exports.up = pgm => {
-    pgm.createTable('song',{
-        id:{
-            type: 'VARCHAR(50)',
-            primaryKey: true
-        },
-        title:{
-            type:'TEXT',
-            notNull: true
-        },
-        year:{
-            type:'INTEGER',
-            notNull: true
-        },
-        performer:{
-            type:'TEXT',
-            notNull: true
-        },
-        genre:{
-            type:'TEXT',
-            notNull: true
-        },
-        duration:{
-            type:'INTEGER'
-        },
-        album_id:{
-            type:'TEXT'
+    pgm.createTable('songs', {
+        id: 'id',
+        title: 'text',
+        year: 'number',
+        performer: 'text',
+        genre: 'text',
+        duration: 'number',
+        album_id: {
+            type: 'TEXT',
+            references: 'albums',
+            onDelete: 'cascade',
         }
     })
 };
 
 exports.down = pgm => {
-    pgm.dropTable('song');
+    pgm.dropTable('songs');
 };

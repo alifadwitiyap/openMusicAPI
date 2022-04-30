@@ -7,21 +7,23 @@ exports.shorthands = {
         type: 'VARCHAR(50)',
         primaryKey: true
     },
-    number: {
-        type: 'SMALLINT',
-        notNull: true
+    username: {
+        type: 'TEXT',
+        notNull: true,
+        unique: true,
     }
-}
+};
 
 exports.up = pgm => {
-    pgm.createTable('albums', {
+    pgm.createTable('users', {
         id: 'id',
-        name: 'text',
-        year: 'number'
+        username: 'username',
+        password: 'text',
+        fullname: 'text',
     })
 };
 
 exports.down = pgm => {
-    pgm.dropTable('albums');
-};
+    pgm.dropTable('users');
 
+};

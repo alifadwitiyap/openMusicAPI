@@ -1,3 +1,4 @@
+
 exports.shorthands = {
     text: {
         type: 'TEXT',
@@ -6,22 +7,21 @@ exports.shorthands = {
     id: {
         type: 'VARCHAR(50)',
         primaryKey: true
-    },
-    number: {
-        type: 'SMALLINT',
-        notNull: true
     }
-}
+};
 
 exports.up = pgm => {
-    pgm.createTable('albums', {
+    pgm.createTable('playlists', {
         id: 'id',
         name: 'text',
-        year: 'number'
+        owner: {
+            type: 'TEXT',
+            references: 'users',
+            onDelete: 'cascade',
+        }
     })
 };
 
 exports.down = pgm => {
-    pgm.dropTable('albums');
+    pgm.dropTable('playlists');
 };
-

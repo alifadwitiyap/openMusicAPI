@@ -6,7 +6,7 @@ module.exports = {
     name: 'songs plugin',
     version: '1.0.0',
     register: async (server, { service, validator }) => {
-        const songhandler = new handler(service, validator)
-        server.route(route(songhandler))
+        const Handler = new handler(service, validator)
+        server.route(route(Handler))
     }
 }
