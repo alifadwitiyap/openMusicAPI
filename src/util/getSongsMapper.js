@@ -1,12 +1,7 @@
-const getSongsMapper = ({
-    id,
-    title,
-    performer,
-})=>({
-    id,
-    title,
-    performer
+const getSongsMapper = ({ id, title, performer }) => ({
+	id,
+	title,
+	performer
 })
 
-module.exports =getSongsMapper
-    
+module.exports = getSongsMapper
