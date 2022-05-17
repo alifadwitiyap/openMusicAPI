@@ -1,0 +1,34 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "indent": "off",
+        "semi": [
+            "error",
+            "always"
+        ],
+        "newIsCap": false,
+        "no-confusing-arrow": [
+            "error",
+            { "allowParens": true, "onlyOneSimpleParam": false }
+        ],
+        "object-shorthand": ["error", "always"],
+        "no-var": "error",
+        "quote-props": ["error", "as-needed"],
+        "no-duplicate-imports": "error",
+        "no-else-return": "error", 
+        "prefer-template": "error", 
+        "prefer-destructuring": ["error", {"object": true, "array": true}]
+    }
+}
