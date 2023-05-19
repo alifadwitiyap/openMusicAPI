@@ -1,7 +1,8 @@
-# Project: Open Music API V3 Test
-# 📁 Collection: Albums 
+# Project: Open Music API
+desc: simple music player backend for dicoding submission using hapi
 
-simple music player backend for dicoding submission using hapi
+
+# 📁 Collection: Albums 
 
 
 ## End-point: Add Album with Invalid Payload
